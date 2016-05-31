@@ -1,0 +1,15 @@
+1-Lista puntos valorados(DE LA TABLA PUNTO SI TIENE UNN IB Y PSA...ETC = 0 NO HA SIDO VALORADO SI LOS TIENE ESTA VALORADO)
+2-lista de usuarios que han valorado(MOSTRAR LOS USUARIOS DE LA TABLA PERCEPCION Y QUE SE TRAIGA LOS USUARIOS QUE VALORARON)
+3-lista de usuarios que no ha valorado(SI NO ESTA EN LA TABLA  PERCEPCION USUARIO ES PORQUE NO HA VALORADO Y SE QUE LO TRAIGA )
+4-lista de puntos con sus respectivos usuarios(traigase de la tabla percepcion los usuarios que han calificado el punto 1)*
+5-lista de usuarios que califiquen mejor sus puntos valorados(TRAIGASE DE LA TABLA PERCEPCIONES LAS PERSONAS QUE HAN VALORADO CON PSA>60 PASE >30 Y ASI ) 
+6-lista de puntos valorados por usuario (traigase de la tabla percepcion los PUNTOS QUE HA CALIFICADO EL USUARIO 1)*
+7-lista de puntos con un IB dado (TRAIGASE DE LA TABLA PUNTO LOS PUNTOS CON UN IB =DADO)
+8-lista de puntos con indices de bienestar superior a un valor dado(TRAIGASETABLA PUNTO LOS PUNTOS CON UN IB SUPERIOR AL 50)
+9-lista de puntos con ib inferior a un valor dado(TRAIGASETABLA PUNTO LOS PUNTOS CON UN IB INFERIOR AL 50)
+10-lista de puntos de puntos vecinos a un punto dado*raiz(x2-x1)^2-(y2-y1)^2
+11-lista de puntos que circundan el area de puntos(delimitar el mapa y comparar con puntos)  TRAIGAME LOS PUNTOS QUE ESTAN A MENOR DISTANCIA DEL AREA  DELIMITADA
+12-eliminar punto (ELIMINAR DE LA TABLA PUNTO )
+13-eliminar puntos en un radio determinado con respecto a otro punto ()
+14-registro de un punto(INSERTAR UN PUNTO)
+

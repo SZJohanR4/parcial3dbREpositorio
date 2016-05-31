@@ -22,7 +22,7 @@ class dataBase {
         $this->servidor = "localhost";
         $this->usuario = "root";
         $this->clave = "";
-        $this->nombreDB = "sumardbjohan";
+        $this->nombreDB = "Procedimientos_almacenados";
     }
 
     function conectar() {

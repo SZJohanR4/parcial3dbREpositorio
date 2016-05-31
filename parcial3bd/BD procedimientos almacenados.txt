@@ -1,0 +1,137 @@
+create database Procedimientos_almacenados;
+use Procedimientos_almacenados;
+
+
+create table region(
+id_region int not null,
+nombre varchar(30) not null,
+PRIMARY KEY(nombre)
+);
+
+insert into region(id_region,nombre) values (1,"zona 1");
+insert into region(id_region,nombre) values (2,"zona 2");
+insert into region(id_region,nombre) values (3,"zona 3");
+insert into region(id_region,nombre) values (4,"zona 4");
+insert into region(id_region,nombre) values (5,"zona 5");
+insert into region(id_region,nombre) values (6,"zona 6");
+insert into region(id_region,nombre) values (7,"zona 7");
+insert into region(id_region,nombre) values (8,"zona 8");
+insert into region(id_region,nombre) values (9,"zona 9");
+insert into region(id_region,nombre) values (10,"zona 10");
+
+create table valoracion(
+id_valoracion int not null,
+A double not null,
+B double not null,
+C double not null,
+PRIMARY KEY(id_valoracion)
+);
+
+insert into valoracion(id_valoracion,A,B,C) values (1,0.3,0.4,0.4);
+insert into valoracion(id_valoracion,A,B,C) values (2,0.1,0.3,0.6);
+insert into valoracion(id_valoracion,A,B,C) values (3,0.1,0.2,0.7);
+insert into valoracion(id_valoracion,A,B,C) values (4,0.7,0.1,0.2);
+insert into valoracion(id_valoracion,A,B,C) values (5,0.9,0.1,0.0);
+insert into valoracion(id_valoracion,A,B,C) values (6,0.5,0.2,0.3);
+
+create table usuario(
+id_usuario varchar (30) not null,
+nombre varchar (30) not null,
+id_valoracion int not null,
+FOREIGN KEY (id_valoracion) REFERENCES valoracion(id_valoracion)on delete cascade on update cascade,
+PRIMARY KEY(id_usuario)
+);
+
+insert into usuario(id_usuario,nombre,id_valoracion) values ("20875643","juan",1);
+insert into usuario(id_usuario,nombre,id_valoracion) values ("98764563","pedro",2);
+insert into usuario(id_usuario,nombre,id_valoracion) values ("4098373","maria",3);
+insert into usuario(id_usuario,nombre,id_valoracion) values ("7896545","camilo",4);
+insert into usuario(id_usuario,nombre,id_valoracion) values ("22897654","alex",5);
+insert into usuario(id_usuario,nombre,id_valoracion) values ("96542312","ana",6);
+
+create table lugares(
+nombre varchar(60) not null,
+descripcion varchar (100) not null,
+PRIMARY KEY(nombre)
+);
+insert into lugares(nombre,descripcion) values ("iglesia","Dios Ministerial");
+insert into lugares(nombre,descripcion) values ("restaurante","el duro");
+insert into lugares(nombre,descripcion) values ("museo","del oro");
+insert into lugares(nombre,descripcion) values ("parque","salitre magico");
+insert into lugares(nombre,descripcion) values ("hospital","mederi");
+insert into lugares(nombre,descripcion) values ("universidad","minuto de dios");
+insert into lugares(nombre,descripcion) values ("colegio","manuel camargo");
+insert into lugares(nombre,descripcion) values ("otro","un lugar");
+
+
+create table punto(
+idpunto int not null AUTO_INCREMENT,
+latitud double  not null,
+longitud double not null,
+IB double not null,
+PSa double not null,
+PSe double not null,
+Pa double not null,
+fk_region varchar(30) not null,
+nombre_hito varchar(60) not null,
+FOREIGN KEY (fk_region) REFERENCES region(nombre)on delete cascade on update cascade,
+FOREIGN KEY (nombre_hito) REFERENCES lugares(nombre)on delete cascade on update cascade,
+PRIMARY KEY(idpunto)
+);
+
+insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (4.691958,-74.051635,55.05,60,57.5,73,"zona 1","otro");
+insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (4.617361,-74.208877,29.8,34,12,90,"zona 1","otro");
+insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (4.694354,-74.028976,44.6,65,34,21,"zona 1","parque");
+insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (4.747388,-74.048202,73.25,85,76.5,33,"zona 2","otro");
+insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (4.543033,-74.112536,0,0,0,0,"zona 2","otro"); 
+
+
+
+create table percepcion(
+idPercepcion int not null AUTO_INCREMENT,
+PSa double not null,
+PSe double not null,
+Pa double not null,
+IB_usuario double not null,
+id_usuariofk varchar (30) not null,
+FK_id_punto int not null,
+FOREIGN KEY (FK_id_punto) REFERENCES punto(idpunto)on delete cascade on update cascade,
+FOREIGN KEY (id_usuariofk) REFERENCES usuario(id_usuario)on delete cascade on update cascade,
+PRIMARY KEY(idPercepcion)
+);
+
+
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (80,75,32,67.3,"20875643",1);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (80,80,76,77.6,"98764563",2);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (30,60,56,48.6,"98764563",1);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (90,55,70,61.5,"7896545",1);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (34,12,90,29.8,"7896545",2);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (65,34,21,44.6,"20875643",3);
+insert into percepcion(PSa,PSe,Pa,IB_usuario,id_usuariofk,FK_id_punto) values (56,23,11,25.7,"98764563",5);
+
+
+
+
+Consultas 
+(1)select idpunto,latitud,longitud from punto  where IB>0 and PSa >0 and PSe >0 and Pa >0
+(2)select DISTINCT id_usuariofk from percepcion;
+(3)Select id_usuario from usuario LEFT OUTER JOIN percepcion ON usuario.id_usuario=percepcion.id_usuariofk WHERE percepcion.id_usuariofk IS NULL 
+(4)select id_usuariofk from percepcion where FKid_punto =1;
+(5)select id_usuariofk from percepcion where  PSa >50 and PSe >60 and Pa >70
+(6)select FK_id_punto from percepcion where id_usuariofk=7896545;
+(7)select idpunto,latitud,longitud from punto where IB >?;
+(8)select idpunto,latitud,longitud from punto where IB >60;
+(9)select idpunto,latitud,longitud from punto where IB <60;
+(10) set a =(select latitud
+(11)puntos que circundan
+(12)delete from punto where idpunto =1;
+(13)eliminar puntos en un radio determinado
+(14) insert into punto(latitud,longitud,IB,PSa,PSe,Pa,fk_region,nombre_hito) values (?,?,?,?,?,?,?,?); 
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+http://www.bing.com/maps/
+
+
